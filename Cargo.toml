@@ -38,6 +38,6 @@ pretty_assertions = "0.7"
 trybuild = "1.0"
 
 [features]
-alloc = []
+alloc = ["nom/alloc"]
 default = ["std"]
-std = ["alloc"]
+std = ["alloc", "nom/std"]
