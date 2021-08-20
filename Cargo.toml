@@ -36,3 +36,8 @@ rustversion = "1.0"
 [dev-dependencies]
 pretty_assertions = "0.7"
 trybuild = "1.0"
+
+[features]
+alloc = []
+default = ["std"]
+std = ["alloc"]
