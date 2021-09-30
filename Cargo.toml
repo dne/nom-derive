@@ -29,7 +29,7 @@ include = [
 members = ["nom-derive-impl"]
 
 [dependencies]
-nom = { version = "7.0", default-features = false }
+nom = { git = "https://github.com/dne/nom", branch = "7.0-no_std", default-features = false }
 nom-derive-impl = { version="=0.10.0", path="./nom-derive-impl" }
 rustversion = "1.0"
 
