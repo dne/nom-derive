@@ -1,12 +1,18 @@
+#[cfg(feature = "alloc")]
 use core::convert::TryFrom;
 use core::ops::RangeFrom;
-use nom::bytes::streaming::take;
-use nom::combinator::{complete, map_res, opt};
-use nom::error::{Error, FromExternalError, ParseError};
-use nom::multi::{many0, many_m_n};
+use nom::combinator::{complete, opt};
+use nom::error::{Error, ParseError};
 use nom::number::streaming::*;
 use nom::sequence::pair;
 use nom::*;
+#[cfg(feature = "alloc")]
+use nom::{
+    bytes::streaming::take,
+    combinator::map_res,
+    error::FromExternalError,
+    multi::{many0, many_m_n},
+};
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
@@ -156,6 +162,7 @@ impl_primitive_type!(u128, be_u128, le_u128);
 impl_primitive_type!(f32, be_f32, le_f32);
 impl_primitive_type!(f64, be_f64, le_f64);
 
+#[cfg(feature = "alloc")]
 impl<'a, E> Parse<&'a [u8], E> for String
 where
     E: ParseError<&'a [u8]> + FromExternalError<&'a [u8], core::str::Utf8Error>,
@@ -184,6 +191,7 @@ where
     }
 }
 
+#[cfg(feature = "alloc")]
 impl<T, I, E> Parse<I, E> for Vec<T>
 where
     I: Clone + PartialEq + InputSlice,
@@ -220,6 +228,7 @@ where
 }
 
 /// *Note: this implementation uses const generics and requires rust >= 1.51*
+#[cfg(feature = "alloc")]
 #[rustversion::since(1.51)]
 impl<T, I, E, const N: usize> Parse<I, E> for [T; N]
 where
@@ -242,6 +251,7 @@ where
     }
 }
 
+#[cfg(feature = "alloc")]
 #[cfg(test)]
 mod tests {
     use super::*;
