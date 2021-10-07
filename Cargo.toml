@@ -41,3 +41,4 @@ trybuild = "1.0"
 alloc = ["nom/alloc"]
 default = ["std"]
 std = ["alloc", "nom/std"]
+defmt-impl = ["nom/defmt"]
